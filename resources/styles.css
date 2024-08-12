@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  pad: 0;
+  background-color: #e5e5e5;
+}
+
+#container {
+  width: 30vw;
+  height: 40vw;
+  padding: 2rem 4rem;
+  margin: 3rem auto 0;
+  background-color: #c0c0c0;
+  border-radius: .5rem;
+  box-shadow: 0 .1rem .5rem #023047;
+}
+
+#screen,
+#buttons {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#screen {
+  margin-top: 2rem;
+  font-size: 2rem;
+  background-color: #faedcd;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  box-shadow: inset 0 -.1rem .2rem gray;
+}
+
+#buttons {
+  margin-top: 1rem;
+  padding: 1rem;
+  display: flex;
+  height: 75%;
+}
+
+#leftButtons,
+#rightButtons {
+  padding: 1rem;
+}
+
+#leftButtons {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+button {
+  border-radius: .5rem;
+  font-size: 2rem;
+  background-color: #023047cc;
+  color: #faedcd;
+  box-shadow: 0 .1rem .5rem #023047;
+}
+
+button:hover {
+  background-color: #023047;
+  cursor: pointer;
+  /* box-shadow: 0 .1rem .5rem #023047; */
+}
+
+.buttonRows {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.buttonRows button {
+  flex: 1;
+}
+
+.buttonRows:last-of-type button:first-of-type {
+  flex: 3;
+}
+
+#rightButtons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#plus,
+#equal {
+  flex: 2;
+}
+
+#minus {
+  flex: 1;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+  height: .2rem;
+  background-color: #023047;
+  border: 0;
+  border-radius: 50%;
+  margin-top: 2rem;
+}
