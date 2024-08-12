@@ -3,7 +3,7 @@ const operatorBtns = document.querySelectorAll('.operator');
 const equalButton = document.querySelector('#equal');
 
 const calculator = {
-  total: 6,
+  total: null,
   operand: ['1', '2'],
   operator: '+',
   math() {
@@ -16,6 +16,7 @@ const calculator = {
   },
   toScreen() {
     const numDisplay = document.querySelector('#screenNumber');
+    const opDisplay = document.querySelector('#opSign');
     const decimalCheck = this.total.toString().includes('.');
     let content = null;
 
@@ -32,6 +33,12 @@ const calculator = {
       content = this.total.toFixed(0);
     }
     numDisplay.textContent = content;
+
+    if (this.operator) {
+      opDisplay.textContent = this.operator;
+    } else {
+      opDisplay.textContent = '';
+    }
   },
   emptyOperand() {
     let len = this.operand.length
@@ -40,33 +47,43 @@ const calculator = {
     }
   },
   equal() {
-    calculator.math();
-    calculator.toScreen();
+    if (calculator.operand.length > 0 && operand) {
+      calculator.math();
+      calculator.emptyOperand();
+
+      calculator.operator = null;
+
+      calculator.toScreen();
+    }
+  },
+  opButton(id) {
+    if (!calculator.total) {
+      calculator.total = +calculator.operand.join('');
+    } else if (calculator.total && calculator.operator && calculator.operand.length > 0) {
+      calculator.math();
+    }
+
     calculator.emptyOperand();
-
-    calculator.operator = null;
-
-    console.log(calculator.operand);
+    calculator.operator = id;
+    calculator.toScreen();
   }
-  // checkNull() {
-  //   return this.total === null && this.operator === null;
-  // }
 }
 
-// calculator.math()
-// console.log(calculator.total);
-// calculator.operator = '-';
-// calculator.math()
-// console.log(calculator.total);
-// calculator.operator = '*';
-// calculator.math()
-// console.log(calculator.total);
-// calculator.operator = '/';
-// calculator.operand = ['2', '6'];
-// calculator.math()
-// console.log(calculator.total);
-
 equalButton.addEventListener('click', calculator.equal);
+
+operatorBtns.forEach(btn => {
+  btn.addEventListener('click', e => {
+    const btnId = e.target.id;
+    calculator.opButton(btnId);
+  })
+})
+
+numberBtns.forEach(btn => {
+  btn.addEventListener('click', e => {
+    const btnId = e.target.id;
+    console.log(btnId);
+  })
+})
 
 /* 
   User presses number,
