@@ -47,7 +47,7 @@ const calculator = {
     }
   },
   equal() {
-    if (calculator.operand.length > 0 && operand) {
+    if (calculator.operand.length > 0 && calculator.operator) {
       calculator.math();
       calculator.emptyOperand();
 
@@ -66,6 +66,16 @@ const calculator = {
     calculator.emptyOperand();
     calculator.operator = id;
     calculator.toScreen();
+  },
+  numButton(id) {
+
+    if (calculator.operand.length < 1 && calculator.operator === '/' && +id === 0) {
+      alert('CANNOT DIVIDE BY 0!!!');
+    } else {
+      const display = document.querySelector('#screenNumber');
+      calculator.operand.push(id);
+      display.textContent = calculator.operand.join('');
+    }
   }
 }
 
@@ -81,7 +91,7 @@ operatorBtns.forEach(btn => {
 numberBtns.forEach(btn => {
   btn.addEventListener('click', e => {
     const btnId = e.target.id;
-    console.log(btnId);
+    calculator.numButton(btnId);
   })
 })
 
