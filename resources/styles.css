@@ -90,12 +90,12 @@ button:hover {
   gap: 1rem;
 }
 
-#plus,
+.plus,
 #equal {
   flex: 2;
 }
 
-#minus {
+.minus {
   flex: 1;
 }
 
