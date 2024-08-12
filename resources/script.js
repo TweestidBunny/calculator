@@ -103,26 +103,3 @@ numberBtns.forEach(btn => {
     calculator.numButton(btnId);
   })
 })
-
-/* 
-  User presses number,
-  Number is added to the operand array.
-
-  Number is shown on the screen.
-
-  User presses operator button (+, -, *, /).
-
-  Selected operator is shown on the screen.
-
-  Total and operator are checked for null values.
-  If total is null, add numbers from operand array
-    to total, add selected operator to 
-    calculator.operator.
-  
-  If total is not null, but operator is null,
-    overwrite total with new operand value,
-    Add selected operator to calculator.operator.
-  
-  If total is not null, and operator is not null,
-    Call math method
- */
