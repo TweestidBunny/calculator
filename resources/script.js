@@ -1,6 +1,9 @@
 const numberBtns = document.querySelectorAll('.number');
 const operatorBtns = document.querySelectorAll('.operator');
 const equalButton = document.querySelector('#equal');
+const clearButton = document.querySelector('#clear');
+const numDisplay = document.querySelector('#screenNumber');
+const opDisplay = document.querySelector('#opSign');
 
 const calculator = {
   total: null,
@@ -15,8 +18,6 @@ const calculator = {
     }
   },
   toScreen() {
-    const numDisplay = document.querySelector('#screenNumber');
-    const opDisplay = document.querySelector('#opSign');
     const decimalCheck = this.total.toString().includes('.');
     let content = null;
 
@@ -72,14 +73,22 @@ const calculator = {
     if (calculator.operand.length < 1 && calculator.operator === '/' && +id === 0) {
       alert('CANNOT DIVIDE BY 0!!!');
     } else {
-      const display = document.querySelector('#screenNumber');
       calculator.operand.push(id);
-      display.textContent = calculator.operand.join('');
+      numDisplay.textContent = calculator.operand.join('');
     }
+  },
+  clearBtn() {
+    calculator.total = null;
+    calculator.operator = null;
+    calculator.emptyOperand();
+
+    numDisplay.textContent = 0;
+    opDisplay.textContent = '';
   }
 }
 
 equalButton.addEventListener('click', calculator.equal);
+clearButton.addEventListener('click', calculator.clearBtn);
 
 operatorBtns.forEach(btn => {
   btn.addEventListener('click', e => {
