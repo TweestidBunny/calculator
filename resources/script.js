@@ -4,6 +4,7 @@ const equalButton = document.querySelector('#equal');
 const clearButton = document.querySelector('#clear');
 const numDisplay = document.querySelector('#screenNumber');
 const opDisplay = document.querySelector('#opSign');
+const decimalBtn = document.querySelector('.decimal');
 
 const calculator = {
   total: null,
@@ -84,11 +85,22 @@ const calculator = {
 
     numDisplay.textContent = 0;
     opDisplay.textContent = '';
+  },
+  decimalBtn(id) {
+    if (!calculator.operand.includes('.')) {
+      calculator.operand.push(id);
+      numDisplay.textContent = calculator.operand.join('');
+    }
   }
 }
 
 equalButton.addEventListener('click', calculator.equal);
 clearButton.addEventListener('click', calculator.clearBtn);
+
+decimalBtn.addEventListener('click', e => {
+  const btnId = e.target.id;
+  calculator.decimalBtn(btnId);
+});
 
 operatorBtns.forEach(btn => {
   btn.addEventListener('click', e => {
