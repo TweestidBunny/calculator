@@ -62,6 +62,15 @@ button {
   box-shadow: 0 .1rem .5rem #023047;
 }
 
+.operator {
+  background-color: #e6394699;
+  color: #023047;
+}
+
+.operator:hover {
+  background-color: #e63946;
+}
+
 button:hover {
   background-color: #023047;
   cursor: pointer;
