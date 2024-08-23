@@ -8,8 +8,8 @@ const decimalBtn = document.querySelector('.decimal');
 
 const calculator = {
   total: null,
-  operand: ['1', '2'],
-  operator: '+',
+  operand: [],
+  operator: null,
   math() {
     switch (this.operator) {
       case '+': this.total += +this.operand.join(''); break;
@@ -49,68 +49,73 @@ const calculator = {
     }
   },
   equal() {
-    if (calculator.operand.length > 0 && calculator.operator) {
-      calculator.math();
-      calculator.emptyOperand();
+    if (this.operand.length > 0 && this.operator) {
+      this.math();
+      this.emptyOperand();
 
-      calculator.operator = null;
+      this.operator = null;
 
-      calculator.toScreen();
+      this.toScreen();
     }
   },
   opButton(id) {
-    if (!calculator.total) {
-      calculator.total = +calculator.operand.join('');
-    } else if (calculator.total && calculator.operator && calculator.operand.length > 0) {
-      calculator.math();
+    if (!this.total) {
+      this.total = +this.operand.join('');
+    } else if (this.total && this.operator && this.operand.length > 0) {
+      this.math();
     }
 
-    calculator.emptyOperand();
-    calculator.operator = id;
-    calculator.toScreen();
+    this.emptyOperand();
+    this.operator = id;
+    this.toScreen();
   },
   numButton(id) {
 
-    if (calculator.operand.length < 1 && calculator.operator === '/' && +id === 0) {
+    if (this.operand.length < 1 && this.operator === '/' && +id === 0) {
       alert('CANNOT DIVIDE BY 0!!!');
     } else {
-      calculator.operand.push(id);
-      numDisplay.textContent = calculator.operand.join('');
+      this.operand.push(id);
+      numDisplay.textContent = this.operand.join('');
     }
   },
   clearBtn() {
-    calculator.total = null;
-    calculator.operator = null;
-    calculator.emptyOperand();
+    this.total = null;
+    this.operator = null;
+    this.emptyOperand();
 
     numDisplay.textContent = 0;
     opDisplay.textContent = '';
   },
   decimalBtn(id) {
-    if (!calculator.operand.includes('.')) {
-      calculator.operand.push(id);
-      numDisplay.textContent = calculator.operand.join('');
+    if (!this.operand.includes('.')) {
+      this.operand.push(id);
+      numDisplay.textContent = this.operand.join('');
     }
   }
 }
 
-equalButton.addEventListener('click', calculator.equal);
-clearButton.addEventListener('click', calculator.clearBtn);
+equalButton.addEventListener('click', function () {
+  calculator.equal();
+});
 
-decimalBtn.addEventListener('click', e => {
+clearButton.addEventListener('click', function () {
+  calculator.clearBtn()
+});
+
+decimalBtn.addEventListener('click', function (e) {
   const btnId = e.target.id;
   calculator.decimalBtn(btnId);
 });
 
 operatorBtns.forEach(btn => {
-  btn.addEventListener('click', e => {
+  btn.addEventListener('click', function (e) {
     const btnId = e.target.id;
     calculator.opButton(btnId);
   })
 })
 
 numberBtns.forEach(btn => {
-  btn.addEventListener('click', e => {
+  btn.addEventListener('click', function (e) {
     const btnId = e.target.id;
     calculator.numButton(btnId);
   })
